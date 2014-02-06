@@ -13,9 +13,9 @@ public class MatrixOperator {
 	 * @return the determinant of the matrix
 	 * @throws IllegalMatrixException
 	 */
-	public static int cofactor(int[][] matrix) throws IllegalMatrixException {
+	public static double cofactor(double[][] matrix) throws IllegalMatrixException {
 		
-		int sum = 0;
+		double sum = 0;
 		
 		if(NotSquareMatrix(matrix) || matrix.length < 1 || matrix[0].length < 1) { //check for illegal matrices
 			throw(new IllegalMatrixException("Error, Cannot find determinant of this array by Cofactor expansion"));
@@ -30,7 +30,7 @@ public class MatrixOperator {
 		}
 		
 		//changes the sign based on the column of the matrix
-		int[] signs = new int[matrix.length];
+		double[] signs = new double[matrix.length];
 		
 		for (int i = 0; i < signs.length; i++) {
 			if (i % 2 == 0) {
@@ -40,7 +40,7 @@ public class MatrixOperator {
 			}
 		}
 		
-		//expands the matrix recursively into smaller matrix.
+		//expands the matrix recursively doubleo smaller matrix.
 		for (int m = 0; m < matrix.length; m++) {
 			sum = sum + (signs[m] * matrix[0][m] * cofactor(removeRowCol(matrix, 0, m)));
 		}
@@ -54,7 +54,7 @@ public class MatrixOperator {
 	 * @param matrix
 	 * @return true if the matrix is not square, false otherwise
 	 */
-	private static boolean NotSquareMatrix(int[][] matrix) {
+	private static boolean NotSquareMatrix(double[][] matrix) {
 		return (matrix.length != matrix[0].length);
 	}
 	
@@ -66,8 +66,8 @@ public class MatrixOperator {
 	 * @param removeCol the column to be removed in the new matrix
 	 * @return the newMatrix.
 	 */
-	private static int[][] removeRowCol(int[][] matrix, int removeRow, int removeCol) {
-		int[][] newMatrix = new int[matrix.length-1][matrix.length-1];
+	private static double[][] removeRowCol(double[][] matrix, double removeRow, double removeCol) {
+		double[][] newMatrix = new double[matrix.length-1][matrix.length-1];
 		int i = 0;
 		int j = 0;
 		
@@ -86,17 +86,17 @@ public class MatrixOperator {
 	/**
 	 * Multiplies two matrices A and B together
 	 * 
-	 * @param int array A
-	 * @param int array B
+	 * @param double array A
+	 * @param double array B
 	 * @return new array formed by multiplying A(B) in that order
 	 * @throws IllegalMatrixException
 	 */
-	public static int[][] multiply(int[][] A, int[][] B) throws IllegalMatrixException {
+	public static double[][] multiply(double[][] A, double[][] B) throws IllegalMatrixException {
 		int aRow = A.length;
 		int aCol = A[0].length;
 		int bRow = B.length;
 		int bCol=  B[0].length;
-		int[][] newMatrix = new int[aRow][bCol];
+		double[][] newMatrix = new double[aRow][bCol];
 		
 		if (aCol != bRow) {
 			throw new IllegalMatrixException("Error, Matrices could not be multiplied due to mismatch in number of rows and columns.");
